@@ -42,6 +42,7 @@ int main()
             fclose(fp);
             goto home;
         case 2:
+            system("cls");
             if(("contacts.dll")==NULL){
                 printf("no records found");
             }
@@ -67,6 +68,7 @@ int main()
             printf("\t\t\t[1]To main menu\t[2]To exit\n");
             printf(">");
             scanf("%d",&opt);
+            fflush(stdin);
             switch(opt){
                 case 1:
                     goto home;
