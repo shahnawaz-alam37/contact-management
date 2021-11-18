@@ -69,8 +69,9 @@ int main()
             }
             if (found != 0)
 	        {
-	            printf("=========================================================== [%c]-(%d)\n",i - 32, found);
+	            printf("=========================================================== [%c]-(%d)\n\n",i - 32, found);
 	        }
+            fclose(fp);
             printf("\t\t\t[1]To main menu\t[2]To exit\n");
             printf(">");
             scanf("%d",&opt);
