@@ -38,7 +38,7 @@ int main()
         case 1:
             /*===============creating a new contact==============*/
             system ("cls");
-            fp=fopen("contacts.dll","a");
+            fp=fopen("contacts.txt","a");
             fflush(stdin);
             printf("enter name:");
             scanf("%[^\n]",&list.name);
@@ -53,11 +53,11 @@ int main()
         case 2:
             /*===============showing all the contacts===============*/
             system("cls");
-            if(("contacts.dll")==NULL){
+            if(("contacts.txt")==NULL){
                 printf("no records found");
             }
             for(i = 97; i <= 122; i = i + 1){
-                fp=fopen("contacts.dll","r");
+                fp=fopen("contacts.txt","r");
                 fflush(stdin);
                 found=0;
                 while(fread(&list,sizeof(list),1,fp)==1){
