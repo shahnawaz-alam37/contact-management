@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------
                 
-                   CONTACT MANAGEMENT PROGRAM
+                   CONTACT MANAGEMENT SYSTEM
 
 ------------------------------------------------------------------*/
 #include<stdio.h>
@@ -14,19 +14,22 @@ struct info
     char name[20];
     long int ph;
 }list;
-int p;
+
+FILE *fp,*ft;
+int p,i,ch,pno,home,found,opt;    
 char name[20];
+
 int main()
 {
-    FILE *fp,*ft;
-    int i,ch,pno,home,found,opt;
+    struct info con[1000];
     home:
     printf("\t\t\tCONTACT MANAGER\n\n");
-    printf("\t\t\t[1] add new contact\n");
+    printf("\t\t\t[1] Add new contact\n");
     printf("\t\t\t[2] show all contacts\n");
     printf("\t\t\t[3] Edit contact\n");
+    printf("\t\t\t[4] Delete contact\n");
     printf("\t\t\t[0] exit\n");
-    printf("\t\t\tenter your choice:");
+    printf("\t\t\tEnter your choice:");
     scanf("%d",&ch);
     switch(ch)
     {
@@ -54,15 +57,18 @@ int main()
             if(("contact.txt")==NULL){
                 printf("no records found");
             }
-            for(i = 97; i <= 122; i = i + 1){
+            for(i = 97; i <= 122; i = i + 1)
+            {
                 fp=fopen("contact.txt","r");
                 fflush(stdin);
                 found=0;
-                while(fread(&list,sizeof(list),1,fp)==1){
-                    if (list.name[0] == i || list.name[0] == i - 32){
-                    printf("name:%s\tNumber:%ld\n",list.name,list.ph);
+                while(fread(&list,sizeof(list),1,fp)==1)
+                {
+                    if (list.name[0] == i || list.name[0] == i - 32)
+                    {
+                        printf("name:%s\tNumber:%ld\n",list.name,list.ph);
+                        found++;
                     }
-                found++;
                 }
             }
             if (found != 0)
@@ -99,6 +105,27 @@ int main()
             fclose(ft);
             remove("contact.txt");
             rename("temp.txt","contact.txt");
+            goto option;
+        case 4:
+            //=================deleting contact==================
+			system("cls");
+        	
+        	printf("\n\n\t***DELETE A CONTACT***\nEnter the name of contact to delete:");
+			fflush(stdin);
+			gets(name);
+        	fp=fopen("contact.txt","r");
+        	ft=fopen("temp.txt","a");
+       		while(fread(&list,sizeof(list),1,fp))
+            {
+				if(strcmp(name,list.name)!=0)
+                	fwrite(&list,sizeof(list),1,ft);
+        	}
+    		fclose(fp);
+        	fclose(ft);
+        	remove("contact.txt");
+        	rename("temp.txt","contact.txt");
+        	printf("Deleted sucessfully");
+        	printf("\n");
             goto option;
              
    }
