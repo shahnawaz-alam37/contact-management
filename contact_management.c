@@ -16,7 +16,7 @@ struct info
 }list;
 
 FILE *fp,*ft;
-int p,i,ch,pno,home,found,opt;    
+int total,i,ch,pno,home,found,opt;    
 char name[20];
 
 int main()
@@ -40,23 +40,26 @@ int main()
             /*===============creating a new contact==============*/
             system ("cls");
             fp=fopen("contact.txt","a");
-            fflush(stdin);
-            printf("enter name:");
-            scanf("%[^\n]",&list.name);
-            fflush(stdin);
-            printf("enter phone number:");
-            scanf("%ld",&list.ph);
-            fflush(stdin);
-            printf("\n\t\t\tcontact saved\n\n");
-            fwrite(&list,sizeof(list),1,fp);
+            for (;;)
+        	{
+                fflush(stdin);
+                printf("enter name:");
+                scanf("%[^\n]",&list.name);
+                if(strcmp(list.name,"")==0 || strcmp(list.name," ")==0)
+                    break;
+                fflush(stdin);
+                printf("enter phone number:");
+                scanf("%ld",&list.ph);
+                total++;
+                fflush(stdin);
+                printf("\n");
+                fwrite(&list,sizeof(list),1,fp);
+            }
             fclose(fp);
             goto home;
         case 2:
             /*===============showing all the contacts===============*/
             system("cls");
-            if(("contact.txt")==NULL){
-                printf("no records found");
-            }
             for(i = 97; i <= 122; i = i + 1)
             {
                 fp=fopen("contact.txt","r");
@@ -85,16 +88,16 @@ int main()
             ft=fopen("temp.txt","w");
             fflush(stdin);
             printf("Edit contact\n===============================\n\n\tEnter the name of contact to edit:");
-            scanf("%[^\n]",name);
+            gets(name);
             while(fread(&list,sizeof(list),1,fp))
             {
-                if(stricmp(name,list.name)!=0)
-                fwrite(&list,sizeof(list),1,ft);
+                if(strcmp(name,list.name)!=0)
+                    fwrite(&list,sizeof(list),1,ft);
             }
             fflush(stdin);
             printf("\n\n..::Editing '%s'\n\n",name);
             printf("\tName(Use identical):");
-            scanf("%[^\n]",&list.name);
+            gets(list.name);
             fflush(stdin);
             printf("\tPhone:");
             scanf("%ld",&list.ph);
@@ -113,6 +116,7 @@ int main()
         	printf("\n\n\t***DELETE A CONTACT***\nEnter the name of contact to delete:");
 			fflush(stdin);
 			gets(name);
+
         	fp=fopen("contact.txt","r");
         	ft=fopen("temp.txt","a");
        		while(fread(&list,sizeof(list),1,fp))
@@ -125,23 +129,22 @@ int main()
         	remove("contact.txt");
         	rename("temp.txt","contact.txt");
         	printf("Deleted sucessfully");
-        	printf("\n");
             goto option;
              
-   }
+    }//===============end of switch cases=============
     option:
     printf("\n==================================\n");
     printf("\t\t\t[1]To main menu\t[0]To exit\n");
-            printf(">");
-            scanf("%d",&opt);
-            fflush(stdin);
-            switch(opt){
-                case 1:
-                    system("cls");
-                    goto home;
-                case 0:
-                    system("cls");
-                    printf("\n\n---------------------program terminated----------------------\n\n");
-                    break;
-            }
-}
+    printf(">");
+    scanf("%d",&opt);
+    fflush(stdin);
+    switch(opt){
+        case 1:
+            system("cls");
+            goto home;
+        case 0:
+            system("cls");
+            printf("\n\n---------------------program terminated----------------------\n\n");
+            break;
+    }
+}//=================end of main function================
