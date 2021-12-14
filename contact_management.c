@@ -7,8 +7,6 @@
 #include<stdlib.h>
 #include<string.h>
 #include<conio.h>
-#include<process.h>
-#include<dos.h>
 void main_menu();
 void options(int choice);
 struct info{
@@ -22,7 +20,7 @@ struct info{
 	
 int main()
 {
-	struct info con[1000];
+	struct info list;
 	main_menu();	
 }
 void main_menu()
@@ -30,7 +28,7 @@ void main_menu()
 	printf("\n\n\n");
 	printf("\t\t\t\t\t***Contact Management***\n\n");
 	printf("\t\t\t\t====================================\n");
-	printf("\t\t\t\t\tPress 1:Save Contact\n\t\t\t\t\tPress 2:Edit Contact\n\t\t\t\t\tPress 3:Delete Contact\n\t\t\t\t\tPress 4:Contact List\n\t\t\t\t\tPress 5 to Exist");
+	printf("\t\t\t\t\tPress 1:create new Contact\n\t\t\t\t\tPress 2:Edit Contact\n\t\t\t\t\tPress 3:Delete Contact\n\t\t\t\t\tPress 4:Contact List\n\t\t\t\t\tPress 5 to Exist");
 	printf("\n\t\t\t\t\tEnter Your Choice:");
 	scanf("%d",&choice);
 	options(choice);
