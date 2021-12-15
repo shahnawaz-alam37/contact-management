@@ -12,7 +12,7 @@ void options(int choice);
 struct info{
 	char name[50];
 	long long int phone_num;
-	char address[50];
+	char address[50];//address is 'email address'
 }list;
 	int i,j,choice,found,total=0;
 	FILE *fp,*ft;
@@ -37,7 +37,7 @@ void options(int choice)
 {
 	switch(choice)
 	{
-		case 1: 				//saving contact
+		case 1://==============saving contact=================
         	system("cls");
         	fp=fopen("contact.txt","a");  
 			for (;;)
@@ -51,7 +51,7 @@ void options(int choice)
             	printf("Phone Num:");
             	scanf("%lld",&list.phone_num);
             	fflush(stdin);
-            	printf("address:");
+            	printf("Emailaddress:");
             	gets(list.address);
             	total++;
             	fflush(stdin);
@@ -65,7 +65,7 @@ void options(int choice)
 			   	main_menu();
 			}
         	break;
-		case 2:				//editing Contact
+		case 2:	//==============editing Contact===================
 			system("cls");
 	        fp=fopen("contact.txt","r");
     	    ft=fopen("temp.txt","w");
@@ -86,7 +86,7 @@ void options(int choice)
         	printf("Phone:");
         	scanf("%lld",&list.phone_num);
         	fflush(stdin);
-        	printf("address:");
+        	printf("Emailaddress:");
         	gets(list.address);
         	fflush(stdin);
         	printf("\n");
@@ -101,7 +101,7 @@ void options(int choice)
 			   	main_menu();
 			}
     	    break;
-		case 3:		//deleting contact
+		case 3://==================deleting contact===================
 			system("cls");
         	
         	printf("\n\n\t***DELETE A CONTACT***\nEnter the name of contact to delete:");
@@ -128,7 +128,7 @@ void options(int choice)
 		 		main_menu();
 			}
        		break;
-		case 4:		//list of contact
+		case 4://====================list of contact==================
 		system("cls");
         printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS");
         for(i=97; i<=122; i=i+1)
@@ -140,16 +140,12 @@ void options(int choice)
             {
                 if(list.name[0]==i || list.name[0]==i-32)
                 {
-                    printf("\nName\t: %s\nPhone\t: %lld\nAddress\t: %s\n",list.name,
+                    printf("\nName\t: %s\nPhone\t: %lld\nEmailAddress\t: %s\n",list.name,
                            list.phone_num,list.address);
                     found++;
                 }
             }
-            if(found!=0)
-            {
-                printf("=========================================================== [%c]-(%d)\n\n",i-32,found);
-                getch();
-            }
+            
             fclose(fp);
         }
         if(getch())
