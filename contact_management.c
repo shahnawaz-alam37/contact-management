@@ -27,9 +27,9 @@ void main_menu()
 {
 	printf("\n\n\n");
 	printf("\t\t\t\t\t***Contact Management***\n\n");
-	printf("\t\t\t\t====================================\n");
+	printf("\t\t\t\t========================================\n");
 	printf("\t\t\t\t\tPress 1:create new Contact\n\t\t\t\t\tPress 2:Edit Contact\n\t\t\t\t\tPress 3:Delete Contact\n\t\t\t\t\tPress 4:Contact List\n\t\t\t\t\tPress 5 to Exist");
-	printf("\n\t\t\t\t\tEnter Your Choice:");
+	printf("\n\n\t\t\t\t\tEnter Your Choice:");
 	scanf("%d",&choice);
 	options(choice);
 }
@@ -156,5 +156,10 @@ void options(int choice)
         	break;
 		case 5:
 			exit(0);
+		default:
+			printf("\n\t\t\t\t\t***invalid choice***");
+			getch();
+			system("cls");
+			main_menu();
 	}
 }
