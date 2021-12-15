@@ -28,7 +28,7 @@ void main_menu()
 	printf("\n\n\n");
 	printf("\t\t\t\t\t***Contact Management***\n\n");
 	printf("\t\t\t\t========================================\n");
-	printf("\t\t\t\t\tPress 1:create new Contact\n\t\t\t\t\tPress 2:Edit Contact\n\t\t\t\t\tPress 3:Delete Contact\n\t\t\t\t\tPress 4:Contact List\n\t\t\t\t\tPress 5 to Exist");
+	printf("\t\t\t\t\tPress 1:create new Contact\n\t\t\t\t\tPress 2:Edit Contact\n\t\t\t\t\tPress 3:Delete Contact\n\t\t\t\t\tPress 4:Contact List\n\t\t\t\t\tPress 5:search contact by name\n\t\t\t\t\tpress 6:exit");
 	printf("\n\n\t\t\t\t\tEnter Your Choice:");
 	scanf("%d",&choice);
 	options(choice);
@@ -154,8 +154,35 @@ void options(int choice)
 		 		main_menu();
 			}
         	break;
-		case 5:
+		case 6:
 			exit(0);
+		case 5:
+		fp=fopen("contact.txt","r");
+        printf("\t\t\t\t\tEnter name to search:");
+        fflush(stdin);
+        gets(names);
+        while(fread(&list,sizeof(list),1,fp)){
+            if(strcmp(names,list.name)==0){
+            	found=1;
+            	printf("\n\t\t\t\t\tname = %s\n", list.name);
+            	printf("\t\t\t\t\tEmail address = %s\n", list.address);
+            	printf("\t\t\t\t\tphone number = %lld\n", list.phone_num);
+	
+            	printf("\t\t\t\t\tEnter any key to return Main menu");
+				getch();
+				system("cls");
+            }
+            }
+            if(!found){
+                printf("\t\t\t\t\tcontact not found\n");
+                printf("\t\t\t\t\tEnter any key to return Main menu");
+                getchar();
+                main_menu();
+            }
+            fclose(fp);
+            main_menu();
+            
+            break;
 		default:
 			printf("\n\t\t\t\t\t***invalid choice***");
 			getch();
