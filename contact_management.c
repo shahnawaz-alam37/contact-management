@@ -40,12 +40,12 @@ void options(int choice)
 		case 1://==============saving contact=================
         	system("cls");
         	fp=fopen("contact.txt","a");  
-			for (;;)
+			for (;;)//this is an infinite loop as the user may enter any number of contacts. So to increase efficiency, we have added loop
         	{
             	fflush(stdin);
             	printf("Press space enter to exit\nEnter Your name:");
             	gets(list.name);
-            	if(strcmp(list.name,"")==0 || strcmp(list.name," ")==0)
+            	if(strcmp(list.name,"")==0 || strcmp(list.name," ")==0)//the loop will terminate when the user enter blank space
     				break;
 				fflush(stdin);
             	printf("Phone Num:");
@@ -56,7 +56,7 @@ void options(int choice)
             	total++;
             	fflush(stdin);
             	printf("\n");
-            	fwrite(&list,sizeof(list),1,fp);
+            	fwrite(&list,sizeof(list),1,fp);//the data will be writen in the form of record using fwrite function.
            	}
 			printf("press any key to goto main menu.");
 			fclose(fp);
@@ -73,10 +73,10 @@ void options(int choice)
         	printf("\t\t***Edit contact***\n\tEnter the name of contact to edit:");
         	gets(names);
 
-       		while(fread(&list,sizeof(list),1,fp))
+       		while(fread(&list,sizeof(list),1,fp))//reading the main contact.txt file
         	{
             	if(strcmp(names,list.name)!=0)
-                	fwrite(&list,sizeof(list),1,ft);
+                	fwrite(&list,sizeof(list),1,ft);//writing all the contacts in new file except the name to edit
         	}
         	fflush(stdin);
         	printf("\nEditing %s\n\n",names);
@@ -90,7 +90,7 @@ void options(int choice)
         	gets(list.address);
         	fflush(stdin);
         	printf("\n");
-        	fwrite(&list,sizeof(list),1,ft);
+        	fwrite(&list,sizeof(list),1,ft);//writing the edited contact details
         	fclose(fp);
         	fclose(ft);
         	remove("contact.txt");
@@ -110,11 +110,11 @@ void options(int choice)
 		
         	fp=fopen("contact.txt","r");
         	ft=fopen("temp.txt","a");
-       		while(fread(&list,sizeof(list),1,fp))
+       		while(fread(&list,sizeof(list),1,fp))//reading the main contact.txt file
             {
              
 				if(strcmp(names,list.name)!=0)
-                	fwrite(&list,sizeof(list),1,ft);
+                	fwrite(&list,sizeof(list),1,ft);//here also writing all the contacts in new file except the name to be deleted
         	}
     		fclose(fp);
         	fclose(ft);
@@ -131,15 +131,19 @@ void options(int choice)
 		case 4://====================list of contact==================
 		system("cls");
         printf("\n\t\t================================\n\t\t\tLIST OF CONTACTS");
-        for(i=97; i<=122; i=i+1)
+        for(i=97; i<=122; i=i+1)//we are using this loop from 97 because the aschii value of 'a' is 97.
         {
             fp=fopen("contact.txt","r");
             fflush(stdin);
             found=0;
             while(fread(&list,sizeof(list),1,fp)==1)
             {
-                if(list.name[0]==i || list.name[0]==i-32)
-                {
+                if(list.name[0]==i || list.name[0]==i-32)/*this logic will print the contact details in alphabetical order in which
+				                                                  the for loop will increment the aschii values of alphabets.
+														          aschii value of a=97 and A=65
+														          if the first letter of name is a or A, it will print first and this loop will 
+														          work untill it reaches the z or Z value*/ 
+				{
                     printf("\nName\t: %s\nPhone\t: %lld\nEmailAddress\t: %s\n",list.name,
                            list.phone_num,list.address);
                     found++;
@@ -162,7 +166,7 @@ void options(int choice)
         fflush(stdin);
         gets(names);
         while(fread(&list,sizeof(list),1,fp)){
-            if(strcmp(names,list.name)==0){
+            if(strcmp(names,list.name)==0){//if name to search matches any name in the file, it will print all the details of it
             	found=1;
             	printf("\n\t\t\t\t\tname = %s\n", list.name);
             	printf("\t\t\t\t\tEmail address = %s\n", list.address);
@@ -173,7 +177,7 @@ void options(int choice)
 				system("cls");
             }
             }
-            if(!found){
+            if(!found){//if no records found
                 printf("\t\t\t\t\tcontact not found\n");
                 printf("\t\t\t\t\tEnter any key to return Main menu");
                 getchar();
