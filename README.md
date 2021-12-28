@@ -12,3 +12,4 @@ This project has 5 main modules which makes it easier to understand.
 * The third module will delete the existing contact.
 * The fourth module will list all the contacts present in your database.
 * The last module will search the details of contact using the name given by the user.
+* The data will not be lost even after termination of program as we are using text file to save the contacts
